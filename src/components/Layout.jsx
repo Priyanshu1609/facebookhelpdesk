@@ -2,6 +2,9 @@
 import * as React from 'react';
 
 import { siteConfig } from '@/constant/config';
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: {
@@ -44,6 +47,6 @@ export default function Layout({
   children,
 }) {
   return (
-    <>{children}</>
+    <main className={`flex min-h-screen w-full items-center justify-between  ${inter.className}`}>{children}</main>
   );
 }
