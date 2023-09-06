@@ -9,10 +9,9 @@ export default {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: {
-          400: "#1E4D91"
-        },
+        primary: "#1E4D91",
         dark: '#222222',
+        smoke: "#F5F5F5"
       },
       keyframes: {
         flicker: {
