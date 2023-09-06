@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg"
 
 const ProfileSection = () => {
     return (
-        <div className="flex flex-col justify-start items-start w-[25%] h-screen border-x-2 bg-gray-100">
+        <div className="flex flex-col justify-start items-start w-[22%] h-screen border-x-2 bg-gray-100">
             <div className='w-full py-6 border-b-2 bg-white '>
                 <div className="mx-auto ">
                     <img className="w-20 mx-auto rounded-full  border-8 border-white" src="https://avatars.githubusercontent.com/u/67946056?v=4" alt="" />
@@ -41,7 +41,7 @@ const ProfileSection = () => {
                         <p className='text-gray-500'>Last Name</p>
                         <p className='font-medium'>RG</p>
                     </div>
-                    <div className="font-semibold mt-3 leading-6 text-[#1E4D91] hover:text-[#1E4D91]"> View more details
+                    <div className="font-semibold mt-3 leading-6 text-[#1E4D91] hover:text-[#1E4D91] cursor-pointer"> View more details
                     </div>
 
                 </div>
