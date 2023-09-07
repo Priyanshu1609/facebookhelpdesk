@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { siteConfig } from '@/constant/config';
 import { Inter } from 'next/font/google'
+import { UserProvider } from '@/context/UserContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -47,6 +48,8 @@ export default function Layout({
   children,
 }) {
   return (
-    <main className={`flex min-h-screen w-full items-center justify-between  ${inter.className}`}>{children}</main>
+    <UserProvider>
+      <main className={`flex min-h-screen w-full items-center justify-between  ${inter.className}`}>{children}</main>
+    </UserProvider>
   );
 }
