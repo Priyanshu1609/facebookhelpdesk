@@ -19,6 +19,7 @@ const MessageSent = ({ username, message }) => (
                 <div>{message}</div>
             </div>
         </div>
+
     </div>
 )
 
@@ -33,7 +34,8 @@ const MessageReceived = ({ username, message }) => (
             <div
                 className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
             >
-                <div>{message}</div>
+                <div className='font-medium'>{message}</div>
+                <div className='absolute -bottom-5 text-xs'>5 march</div>
             </div>
         </div>
     </div>
