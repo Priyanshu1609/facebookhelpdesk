@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Register = () => {
     const router = useRouter();
-    const { user } = useUserContext();
+    const { user, setUser, setAccessToken } = useUserContext();
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +50,7 @@ const Register = () => {
 
             localStorage.setItem("user", JSON.stringify(res.data.user));
             localStorage.setItem("accessToken", JSON.stringify(res.data.accessToken));
+            alert("Registered Successfully");
 
             router.push("/")
 
