@@ -25,7 +25,7 @@ const ConversationBox = ({ message, pageId, activeMessage, setActiveMessage }) =
     const latestMessage = getLatestMessage(message.messages.data);
 
     return (
-        <div onClick={() => setActiveMessage(message)} className={`w-full ${message === activeMessage ? "bg-gray-100 " : "bg-white"}h-28 px-4 py-3 text-sm border-b-2 cursor-pointer`}>
+        <div onClick={() => setActiveMessage(message)} className={`w-full ${message === activeMessage ? "bg-gray-100 " : "bg-white"} appear h-28 px-4 py-3 text-sm border-b-2 cursor-pointer`}>
             <div className='flex items-start justify-between'>
                 <div className='flex space-x-3 items-center'>
                     <input type="checkbox" className="appearance-none rounded-[3px] checked:ring-0 focus:ring-0" />

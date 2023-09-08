@@ -20,6 +20,7 @@ const Dashboard = () => {
     const [messages, setMessages] = useState([]);
     const [activeMessage, setActiveMessage] = useState(null);
     const [pageId, setPageId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     console.log({ messages });
 
@@ -67,6 +68,7 @@ const Dashboard = () => {
     const fetchPageDetails = async () => {
         if (!session?.accessToken) return;
         try {
+            setIsLoading(true);
             console.log("called fetch details")
             let config = {
                 method: 'get',
@@ -92,6 +94,8 @@ const Dashboard = () => {
 
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     }
     let loaded = false;
@@ -111,9 +115,9 @@ const Dashboard = () => {
     return (
         <main className='flex items-center w-full'>
             <SideBar />
-            <Conversations messages={messages} activeMessage={activeMessage} setActiveMessage={setActiveMessage} pageId={pageId} fetchPageDetails={fetchPageDetails} />
-            <ChatBox activeMessage={activeMessage} pageId={pageId} fetchPageDetails={fetchPageDetails} />
-            <ProfileSection activeMessage={activeMessage} pageId={pageId} />
+            <Conversations isLoading={isLoading} messages={messages} activeMessage={activeMessage} setActiveMessage={setActiveMessage} pageId={pageId} fetchPageDetails={fetchPageDetails} />
+            <ChatBox isLoading={isLoading} activeMessage={activeMessage} pageId={pageId} fetchPageDetails={fetchPageDetails} />
+            <ProfileSection isLoading={isLoading} activeMessage={activeMessage} pageId={pageId} />
         </main>
     )
 }

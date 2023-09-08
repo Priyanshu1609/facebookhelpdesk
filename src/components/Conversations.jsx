@@ -5,7 +5,7 @@ import { FaArrowRotateRight } from "react-icons/fa6"
 import ConversationBox from './ConversationBox'
 import Skeleton from './UI/Skeleton'
 
-const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetchPageDetails }) => {
+const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetchPageDetails, isLoading }) => {
 
     console.log(messages)
 
@@ -20,7 +20,7 @@ const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetc
             </div>
 
             {
-                !messages.length ? <div className='w-full'>
+                isLoading ? <div className='w-full'>
                     <Skeleton className='h-28 w-full border-b-2 ' />
                     <Skeleton className='h-28 w-full border-b-2 ' />
                     <Skeleton className='h-28 w-full border-b-2 ' />

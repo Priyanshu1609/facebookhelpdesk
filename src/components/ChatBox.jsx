@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Loader, getFirstLetter } from '@/lib/utils'
+import { Loader, getFirstLetter, timeFormat } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import Skeleton from './UI/Skeleton'
 
 
-const MessageSent = ({ username, message }) => (
-    <div className="col-start-1 col-end-8 p-3 rounded-lg">
+const MessageSent = ({ username, message, time }) => (
+    <div className="col-start-1 col-end-8 px-3 pt-2 rounded-lg">
         <div className="flex flex-row items-center">
             <div
                 className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -23,8 +23,8 @@ const MessageSent = ({ username, message }) => (
     </div>
 )
 
-const MessageReceived = ({ username, message }) => (
-    <div className="col-start-6 col-end-13 p-3 rounded-lg">
+const MessageReceived = ({ username, message, time }) => (
+    <div className="col-start-6 col-end-13 px-3 pt-6 w-full rounded-lg">
         <div className="flex items-center justify-start flex-row-reverse">
             <div
                 className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -35,13 +35,13 @@ const MessageReceived = ({ username, message }) => (
                 className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
             >
                 <div className='font-medium'>{message}</div>
-                {/* <div className='absolute -bottom-5 text-xs'>5 march</div> */}
+                <div className='absolute -bottom-5 w-full text-[0.6rem]'>{timeFormat(time)}</div>
             </div>
         </div>
     </div>
 )
 
-const ChatBox = ({ activeMessage, pageId, fetchPageDetails }) => {
+const ChatBox = ({ activeMessage, pageId, fetchPageDetails, isLoading: messageLoading }) => {
     // console.log({ activeMessage });
 
     const messages = activeMessage?.messages.data.sort((a, b) => new Date(a.created_time) - new Date(b.created_time));
@@ -80,7 +80,7 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails }) => {
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `https://graph.facebook.com/v17.0/${pageId}/messages?recipient=%7Bid%3A6608743869172081%7D&message=%7B%20%22text%22%3A%20%22${encodeURIComponent(message)}%22%20%7D&messaging_type=RESPONSE&access_token=${response.data.data[0].access_token}`,
+                url: `https://graph.facebook.com/v17.0/${pageId}/messages?recipient=%7Bid%3A${activeMessage?.participants.data[0].id}%7D&message=%7B%20%22text%22%3A%20%22${encodeURIComponent(message)}%22%20%7D&messaging_type=RESPONSE&access_token=${response.data.data[0].access_token}`,
                 headers: {}
             };
 
@@ -110,17 +110,17 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails }) => {
             >
                 <div className="flex flex-col  overflow-x-auto mb-4 w-full">
                     <div className="flex flex-col ">
-                        <div ref={divRef} className="grid grid-cols-12 gap-y-2">
+                        <div ref={divRef} className="grid grid-cols-12 gap-y-0">
 
                             {
-                                !messages ? <div className='w-full'>
+                                messageLoading ? <div className='w-full'>
                                     <Skeleton className='col-start-1 col-end-8 p-3 rounded-lg h-12  w-96 ' />
                                 </div> :
-                                    messages.map((message, index) => (
+                                    messages?.map((message, index) => (
                                         message.from.id === pageId ?
-                                            <MessageReceived key={index} username={message.from.name} message={message.message} />
+                                            <MessageReceived key={index} time={message.created_time} username={message.from.name} message={message.message} />
                                             :
-                                            <MessageSent key={index} username={message.from.name} message={message.message} />
+                                            <MessageSent time={message.created_time} key={index} username={message.from.name} message={message.message} />
                                     ))
                             }
 

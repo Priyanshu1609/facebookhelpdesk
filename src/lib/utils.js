@@ -48,6 +48,25 @@ export function timeAgoFromISO(timestamp) {
   }
 }
 
+export function timeFormat(inputDateString) {
+  const inputDate = new Date(inputDateString);
+
+  // Define month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Extract day, month, and year from the Date object
+  const day = inputDate.getDate();
+  const month = monthNames[inputDate.getMonth()];
+  const year = inputDate.getFullYear();
+
+  // Create the output date string in the desired format
+  const outputDateString = `${day} ${month} ${year}`;
+  return outputDateString
+}
+
 export const Loader = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <style>

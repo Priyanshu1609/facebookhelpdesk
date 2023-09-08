@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg"
 import { getFirstName, getLastName, getMailId } from '@/lib/utils';
 import Skeleton from './UI/Skeleton';
 
-const ProfileSection = ({ activeMessage, pageId }) => {
+const ProfileSection = ({ activeMessage, pageId, isLoading }) => {
     return (
         <div className="flex flex-col justify-start items-start w-[22%] h-screen border-x-2 bg-[#EFF2F7]">
             <div className='w-full py-6 border-b-2 bg-white '>
@@ -12,7 +12,7 @@ const ProfileSection = ({ activeMessage, pageId }) => {
                     <img className="w-20 mx-auto rounded-full  border-8 border-white" src="https://www.rattanhospital.in/wp-content/uploads/2020/03/user-dummy-pic.png" alt="" />
                     <div className="text-center mt-2 text-lg font-semibold">
                         {
-                            !activeMessage ? <div className='w-full'>
+                            isLoading ? <div className='w-full'>
                                 <Skeleton className='h-6 w-24 mx-auto' />
                             </div> :
                                 activeMessage?.participants.data[0].name
