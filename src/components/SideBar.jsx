@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const SideBar = () => {
     const router = useRouter();
     return (
-        <div className="flex flex-col items-center w-12 h-screen py-8 space-y-8 bg-primary">
+        <div className="flex flex-col items-center w-[3.5rem] h-screen py-8 space-y-8 bg-primary">
             <button onClick={() => router.push("/")} href="#">
                 <img className="w-auto h-6 hover:opacity-60" src="/logo.jpg" alt="" />
             </button>

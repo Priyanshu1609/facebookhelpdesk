@@ -8,6 +8,7 @@ import ProfileSection from '@/components/ProfileSection'
 import SideBar from '@/components/SideBar'
 import { useUserContext } from '@/context/UserContext'
 import { useRouter } from 'next/router'
+import { sampleData } from '@/lib/data'
 
 // { "text": "Hello, new customer!" }
 
@@ -20,7 +21,48 @@ const Dashboard = () => {
     const [activeMessage, setActiveMessage] = useState(null);
     const [pageId, setPageId] = useState(null);
 
-    console.log({ activeMessage });
+    console.log({ messages });
+
+    const addMessagesToDB = async (messages) => {
+        try {
+            setMessages([]);
+            setActiveMessage(null);
+
+            messages.forEach(async (message) => {
+
+                var date = new Date(message.updated_time);
+                var timestamp = date.getTime();
+
+                let data = JSON.stringify({
+                    "messageId": message.id,
+                    "message": JSON.stringify(message),
+                    "updated_time": timestamp
+                })
+
+                let config = {
+                    method: 'post',
+                    maxBodyLength: Infinity,
+                    url: 'https://facebookhelpdeskbackend.vercel.app/api/facebook/messages/add',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: data
+                };
+
+
+                const res = await axios.request(config)
+
+
+                setMessages(prev => [...prev, JSON.parse(res.data.data.message)])
+
+            })
+            setActiveMessage(messages[0]);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     const fetchPageDetails = async () => {
         if (!session?.accessToken) return;
@@ -45,17 +87,19 @@ const Dashboard = () => {
 
             const data = await axios.request(messageConfig);
 
-            setMessages(data.data.data);
-            setActiveMessage(data.data.data[0]);
 
+            await addMessagesToDB(data.data.data);
 
         } catch (error) {
             console.error(error);
         }
     }
-
+    let loaded = false;
     useEffect(() => {
-        fetchPageDetails()
+        if (!loaded) {
+            fetchPageDetails();
+            loaded = true;
+        }
     }, [session?.accessToken])
 
     useEffect(() => {

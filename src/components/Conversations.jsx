@@ -3,8 +3,12 @@ import React from 'react'
 import { HiOutlineBars3CenterLeft } from "react-icons/hi2"
 import { FaArrowRotateRight } from "react-icons/fa6"
 import ConversationBox from './ConversationBox'
+import Skeleton from './UI/Skeleton'
 
 const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetchPageDetails }) => {
+
+    console.log(messages)
+
     return (
         <div className='flex flex-col items-center w-[25%] h-screen'>
             <div className='flex items-center px-2 py-4 border-b-2 justify-between w-full'>
@@ -16,10 +20,15 @@ const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetc
             </div>
 
             {
-                messages.map((message, index) => (
+                !messages.length ? <div className='w-full'>
+                    <Skeleton className='h-28 w-full border-b-2 ' />
+                    <Skeleton className='h-28 w-full border-b-2 ' />
+                    <Skeleton className='h-28 w-full border-b-2 ' />
+                </div> :
+                    messages.map((message, index) => (
 
-                    <ConversationBox key={index} message={message} pageId={pageId} activeMessage={activeMessage} setActiveMessage={setActiveMessage} />
-                ))
+                        <ConversationBox key={index} message={message} pageId={pageId} activeMessage={activeMessage} setActiveMessage={setActiveMessage} />
+                    ))
             }
         </div>
     )

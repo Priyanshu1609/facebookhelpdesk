@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Loader, getFirstLetter } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
+import Skeleton from './UI/Skeleton'
 
 
 const MessageSent = ({ username, message }) => (
@@ -19,7 +20,6 @@ const MessageSent = ({ username, message }) => (
                 <div>{message}</div>
             </div>
         </div>
-
     </div>
 )
 
@@ -35,7 +35,7 @@ const MessageReceived = ({ username, message }) => (
                 className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
             >
                 <div className='font-medium'>{message}</div>
-                <div className='absolute -bottom-5 text-xs'>5 march</div>
+                {/* <div className='absolute -bottom-5 text-xs'>5 march</div> */}
             </div>
         </div>
     </div>
@@ -98,7 +98,7 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails }) => {
 
     return (
         <div className="flex flex-col justify-start items-start w-[53%] h-screen border-x-2">
-            <div className='flex items-center px-2 py-4 border-b-2  justify-between w-full'>
+            <div className='flex items-center px-2 py-4 h-[3.9rem] border-b-2  justify-between w-full'>
                 <div className='flex items-center'>
                     <p className='font-semibold text-xl ml-2'>{activeMessage?.participants.data[0].name}</p>
                 </div>
@@ -113,12 +113,15 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails }) => {
                         <div ref={divRef} className="grid grid-cols-12 gap-y-2">
 
                             {
-                                messages?.map((message, index) => (
-                                    message.from.id === pageId ?
-                                        <MessageReceived key={index} username={message.from.name} message={message.message} />
-                                        :
-                                        <MessageSent key={index} username={message.from.name} message={message.message} />
-                                ))
+                                !messages ? <div className='w-full'>
+                                    <Skeleton className='col-start-1 col-end-8 p-3 rounded-lg h-12  w-96 ' />
+                                </div> :
+                                    messages.map((message, index) => (
+                                        message.from.id === pageId ?
+                                            <MessageReceived key={index} username={message.from.name} message={message.message} />
+                                            :
+                                            <MessageSent key={index} username={message.from.name} message={message.message} />
+                                    ))
                             }
 
 

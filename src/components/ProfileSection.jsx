@@ -2,6 +2,7 @@ import React from 'react'
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg"
 import { getFirstName, getLastName, getMailId } from '@/lib/utils';
+import Skeleton from './UI/Skeleton';
 
 const ProfileSection = ({ activeMessage, pageId }) => {
     return (
@@ -9,7 +10,14 @@ const ProfileSection = ({ activeMessage, pageId }) => {
             <div className='w-full py-6 border-b-2 bg-white '>
                 <div className="mx-auto ">
                     <img className="w-20 mx-auto rounded-full  border-8 border-white" src="https://www.rattanhospital.in/wp-content/uploads/2020/03/user-dummy-pic.png" alt="" />
-                    <div className="text-center mt-2 text-lg font-semibold">{activeMessage?.participants.data[0].name}</div>
+                    <div className="text-center mt-2 text-lg font-semibold">
+                        {
+                            !activeMessage ? <div className='w-full'>
+                                <Skeleton className='h-6 w-24 mx-auto' />
+                            </div> :
+                                activeMessage?.participants.data[0].name
+                        }
+                    </div>
                     <div className="text-center text-gray-500 mt font-light text-xs flex items-center justify-center ">
                         <div className='h-2 w-2 rounded-full bg-gray-300 mr-2' />
                         <p className='font-medium'>Offline</p>
