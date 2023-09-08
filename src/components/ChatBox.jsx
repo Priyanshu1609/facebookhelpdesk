@@ -10,14 +10,14 @@ const MessageSent = ({ username, message, time }) => (
     <div className="col-start-1 col-end-8 px-3 pt-2 rounded-lg">
         <div className="flex flex-row items-center">
             <div
-                className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                className="mr-3 -mt-4 flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
             >
                 {getFirstLetter(username)}
             </div>
             <div>
 
                 <div
-                    className=" mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
+                    className=" text-sm bg-white py-2 px-4 shadow rounded-md"
                 >
                     <div className='font-medium'>{message}</div>
                 </div>
@@ -31,11 +31,11 @@ const MessageReceived = ({ username, message, time }) => (
     <div className="col-start-6 col-end-13 px-3 pt-6 w-full rounded-lg ">
         <div className="flex items-center justify-start flex-row-reverse">
             <div
-                className="flex items-center  justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                className="flex items-center -mt-4  justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
             >
                 {getFirstLetter(username)}
             </div>
-            <div>
+            <div className=''>
 
                 <div
                     className=" mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
