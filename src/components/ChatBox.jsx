@@ -14,28 +14,35 @@ const MessageSent = ({ username, message, time }) => (
             >
                 {getFirstLetter(username)}
             </div>
-            <div
-                className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-md"
-            >
-                <div>{message}</div>
+            <div>
+
+                <div
+                    className=" mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
+                >
+                    <div className='font-medium'>{message}</div>
+                </div>
+                <div className='w-full text-[0.5rem] pt-1  px-3'>{username}{" - "}{timeFormat(time)}</div>
             </div>
         </div>
     </div>
 )
 
 const MessageReceived = ({ username, message, time }) => (
-    <div className="col-start-6 col-end-13 px-3 pt-6 w-full rounded-lg">
+    <div className="col-start-6 col-end-13 px-3 pt-6 w-full rounded-lg ">
         <div className="flex items-center justify-start flex-row-reverse">
             <div
-                className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                className="flex items-center  justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
             >
                 {getFirstLetter(username)}
             </div>
-            <div
-                className="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
-            >
-                <div className='font-medium'>{message}</div>
-                <div className='absolute -bottom-5 w-full text-[0.6rem]'>{timeFormat(time)}</div>
+            <div>
+
+                <div
+                    className=" mr-3 text-sm bg-white py-2 px-4 shadow rounded-md"
+                >
+                    <div className='font-medium'>{message}</div>
+                </div>
+                <div className='w-full text-[0.5rem] pt-1  px-3'>{username}{" - "}{timeFormat(time)}</div>
             </div>
         </div>
     </div>
@@ -108,7 +115,7 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails, isLoading: messageLo
 
                 className="flex flex-col flex-auto  bg-gray-100  w-full overflow-y-scroll "
             >
-                <div className="flex flex-col  overflow-x-auto mb-4 w-full">
+                <div className="flex flex-col   mb-4 w-full">
                     <div className="flex flex-col ">
                         <div ref={divRef} className="grid grid-cols-12 gap-y-0">
 
