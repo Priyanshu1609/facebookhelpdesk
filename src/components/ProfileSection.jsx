@@ -9,7 +9,8 @@ const ProfileSection = ({ activeMessage, pageId, isLoading }) => {
         <div className="flex flex-col justify-start items-start w-[22%] h-screen border-x-2 bg-[#EFF2F7]">
             <div className='w-full py-6 border-b-2 bg-white '>
                 <div className="mx-auto ">
-                    <img className="w-20 mx-auto rounded-full  border-8 border-white" src="https://www.rattanhospital.in/wp-content/uploads/2020/03/user-dummy-pic.png" alt="" />
+                    <img className="w-20 mx-auto rounded-full  border-8 border-white" src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${activeMessage?.participants.data[0].name}`} alt="" />
+                    {/* <img className="w-20 mx-auto rounded-full  border-8 border-white" src="https://www.rattanhospital.in/wp-content/uploads/2020/03/user-dummy-pic.png" alt="" /> */}
                     <div className="text-center mt-2 text-lg font-semibold">
                         {
                             isLoading ? <div className='w-full'>
