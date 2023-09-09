@@ -148,7 +148,7 @@ const ChatBox = ({ activeMessage, pageId, fetchPageDetails, isLoading: messageLo
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 className="flex w-full border rounded-md focus:outline-none focus:border-indigo-300 pl-4 h-10"
-                                placeholder="Write message..."
+                                placeholder={`Message ${activeMessage?.participants.data[0].name}`}
                             />
 
                             <button
