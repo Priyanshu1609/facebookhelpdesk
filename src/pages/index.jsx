@@ -26,6 +26,15 @@ export default function Home() {
     }
   }, [user])
 
+  let loaded = false;
+  useEffect(() => {
+    if (!loaded) {
+      router.prefetch("/dashboard");
+      loaded = true;
+    }
+  }, [])
+
+
 
   return (
     <main

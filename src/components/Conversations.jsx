@@ -4,6 +4,7 @@ import { HiOutlineBars3CenterLeft } from "react-icons/hi2"
 import { FaArrowRotateRight } from "react-icons/fa6"
 import ConversationBox from './ConversationBox'
 import Skeleton from './UI/Skeleton'
+import { cn } from '@/lib/utils'
 
 const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetchPageDetails, isLoading }) => {
 
@@ -16,7 +17,7 @@ const Conversations = ({ messages, activeMessage, setActiveMessage, pageId, fetc
                     <HiOutlineBars3CenterLeft className='w-4 h-4 font-semibold rotate-0' />
                     <p className='font-semibold text-xl ml-2'>Conversations</p>
                 </div>
-                <FaArrowRotateRight onClick={() => fetchPageDetails()} className='text-gray-600 w-4 h-4 cursor-pointer' />
+                <FaArrowRotateRight onClick={() => fetchPageDetails()} className={cn(`text-gray-600 w-4 h-4 cursor-pointer ${isLoading && "animate-spin"}`)} />
             </div>
 
             {
