@@ -48,23 +48,23 @@ export function timeAgoFromISO(timestamp) {
   }
 }
 
-export function timeFormat(inputDateString) {
-  const inputDate = new Date(inputDateString);
-
-  // Define month names
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+export function timeFormat(inputDate) {
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
-  // Extract day, month, and year from the Date object
-  const day = inputDate.getDate();
-  const month = monthNames[inputDate.getMonth()];
-  const year = inputDate.getFullYear();
+  const date = new Date(inputDate);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
 
-  // Create the output date string in the desired format
-  const outputDateString = `${day} ${month} ${year}`;
-  return outputDateString
+  const period = hours < 12 ? 'am' : 'pm';
+  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+
+  return `${day} ${month} ${formattedHours}:${minutes} ${period}`;
 }
 
 export const Loader = () => (
