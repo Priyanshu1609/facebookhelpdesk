@@ -1,7 +1,6 @@
 export const siteConfig = {
-  title: 'Next.js + Tailwind CSS + TypeScript Starter',
+  title: 'Facebook Help Desk',
   description:
-    'A starter for Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
-  /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://tsnext-tw.thcl.dev',
+  "Streamline your Facebook communication with our app - effortlessly connect your account, collaborate with team members, and respond to messages seamlessly. Enhance your Facebook experience with our app - easily manage messages, delegate tasks to your team, and ensure efficient communication.",
+  url: 'https://facebookhelpdesk.vercel.app/',
 };
